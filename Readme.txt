@@ -4,4 +4,4 @@ xong publish lên nghe..
 
 Thằng nào ahihi ta thiếng chừ á, =)))
 
-vương ngu người đã xuất hiện :v
+Yên là linh hồn của nhóm
