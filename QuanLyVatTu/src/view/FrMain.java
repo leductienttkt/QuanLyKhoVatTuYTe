@@ -34,9 +34,9 @@ public class FrMain extends javax.swing.JFrame {
         pnBot = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mniQLVatTu = new javax.swing.JMenuItem();
+        mniQLNhapXuat = new javax.swing.JMenuItem();
+        mniQLNhanVien = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -48,6 +48,7 @@ public class FrMain extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 500));
 
         pnCenter.setLayout(new java.awt.BorderLayout());
         getContentPane().add(pnCenter, java.awt.BorderLayout.CENTER);
@@ -67,19 +68,29 @@ public class FrMain extends javax.swing.JFrame {
 
         jMenu1.setText("Danh mục quản lý");
 
-        jMenuItem2.setText("Quản lý vật tư");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mniQLVatTu.setText("Quản lý vật tư");
+        mniQLVatTu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mniQLVatTuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(mniQLVatTu);
 
-        jMenuItem3.setText("Quản lý nhập xuất");
-        jMenu1.add(jMenuItem3);
+        mniQLNhapXuat.setText("Quản lý nhập xuất");
+        mniQLNhapXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLNhapXuatActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniQLNhapXuat);
 
-        jMenuItem4.setText("Quản lý nhân viên");
-        jMenu1.add(jMenuItem4);
+        mniQLNhanVien.setText("Quản lý nhân viên");
+        mniQLNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLNhanVienActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniQLNhanVien);
 
         jMenuBar1.add(jMenu1);
 
@@ -111,9 +122,23 @@ public class FrMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mniQLVatTuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLVatTuActionPerformed
+        pnCenter.removeAll();
+        pnCenter.revalidate();
         pnCenter.add(new pnQuanLyTonKho(), BorderLayout.CENTER);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mniQLVatTuActionPerformed
+
+    private void mniQLNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLNhanVienActionPerformed
+        pnCenter.removeAll();
+        pnCenter.revalidate();
+        pnCenter.add(new pnQuanLyNhanVien(), BorderLayout.CENTER);
+    }//GEN-LAST:event_mniQLNhanVienActionPerformed
+
+    private void mniQLNhapXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLNhapXuatActionPerformed
+        pnCenter.removeAll();
+        pnCenter.revalidate();
+        pnCenter.add(new pnQuanLyNhapXuat(), BorderLayout.CENTER);
+    }//GEN-LAST:event_mniQLNhapXuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,13 +182,13 @@ public class FrMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem mniQLNhanVien;
+    private javax.swing.JMenuItem mniQLNhapXuat;
+    private javax.swing.JMenuItem mniQLVatTu;
     private javax.swing.JPanel pnBot;
     private javax.swing.JPanel pnCenter;
     // End of variables declaration//GEN-END:variables

@@ -9,12 +9,12 @@ package view;
  *
  * @author Administrator
  */
-public class pnQuanLyTonKho extends javax.swing.JPanel {
+public class pnQuanLyNhanVien extends javax.swing.JPanel {
 
     /**
      * Creates new form Quanlyvattu
      */
-    public pnQuanLyTonKho() {
+    public pnQuanLyNhanVien() {
         initComponents();
     }
 
@@ -36,6 +36,9 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        btCatThem = new javax.swing.JButton();
+        btCatSua = new javax.swing.JButton();
+        btCatXoa = new javax.swing.JButton();
         btCatNhapLai = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -64,6 +67,26 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
+        btCatThem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btCatThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-icon.gif"))); // NOI18N
+        btCatThem.setText("Thêm");
+        btCatThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCatThemActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btCatThem);
+
+        btCatSua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btCatSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-icon.gif"))); // NOI18N
+        btCatSua.setText("Sửa");
+        jPanel4.add(btCatSua);
+
+        btCatXoa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btCatXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/del.gif"))); // NOI18N
+        btCatXoa.setText("Xóa");
+        jPanel4.add(btCatXoa);
+
         btCatNhapLai.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btCatNhapLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button_cancel.png"))); // NOI18N
         btCatNhapLai.setText("Thoát");
@@ -75,13 +98,13 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên hàng hóa", "Mã hàng hóa", "Số lượng", "Ngày SX", "Hạn SD", "Nhà cung cấp"
+                "Title 1", "Mã nhân viên", "Tên nhân viên", "Chức vụ", "Lương", "Ca làm việc", "Ngày sinh", "Giới tính", "Địa chỉ", "Phone"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -100,9 +123,16 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btCatThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatThemActionPerformed
+        new FrThemNhanVien().setVisible(true);
+    }//GEN-LAST:event_btCatThemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCatNhapLai;
+    private javax.swing.JButton btCatSua;
+    private javax.swing.JButton btCatThem;
+    private javax.swing.JButton btCatXoa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
