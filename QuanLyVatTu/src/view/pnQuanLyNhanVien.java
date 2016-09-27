@@ -92,7 +92,7 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
 
         btCatNhapLai.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btCatNhapLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button_cancel.png"))); // NOI18N
-        btCatNhapLai.setText("Thoát");
+        btCatNhapLai.setText("Reset");
         jPanel4.add(btCatNhapLai);
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.CENTER);

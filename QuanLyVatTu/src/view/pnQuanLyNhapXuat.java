@@ -311,7 +311,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel {
 
         btCatNhapLai.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btCatNhapLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button_cancel.png"))); // NOI18N
-        btCatNhapLai.setText("Thoát");
+        btCatNhapLai.setText("Reset");
         jPanel3.add(btCatNhapLai);
 
         pnNhap.add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -549,7 +549,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
