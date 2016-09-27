@@ -23,6 +23,7 @@ public class LibraryDbConnect {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             this.conn = DriverManager.getConnection(url, user, password);
+            JOptionPane.showMessageDialog(null, "kết nối Database!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Không thể kết nối Database!");
         }
