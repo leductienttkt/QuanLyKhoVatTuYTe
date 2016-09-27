@@ -38,6 +38,8 @@ public class FrMain extends javax.swing.JFrame {
         mniQLNhapXuat = new javax.swing.JMenuItem();
         mniQLNhanVien = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -48,8 +50,8 @@ public class FrMain extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
+        pnCenter.setPreferredSize(new java.awt.Dimension(800, 500));
         pnCenter.setLayout(new java.awt.BorderLayout());
         getContentPane().add(pnCenter, java.awt.BorderLayout.CENTER);
 
@@ -66,8 +68,13 @@ public class FrMain extends javax.swing.JFrame {
 
         getContentPane().add(pnBot, java.awt.BorderLayout.PAGE_END);
 
-        jMenu1.setText("Danh mục quản lý");
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Phần mềm quản lý vật tư y tế", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 51, 0))); // NOI18N
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cat.png"))); // NOI18N
+        jMenu1.setText("<html>Danh mục<br />quản lý</html>");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        mniQLVatTu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder-icon.png"))); // NOI18N
         mniQLVatTu.setText("Quản lý vật tư");
         mniQLVatTu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +83,7 @@ public class FrMain extends javax.swing.JFrame {
         });
         jMenu1.add(mniQLVatTu);
 
+        mniQLNhapXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/import-icon.png"))); // NOI18N
         mniQLNhapXuat.setText("Quản lý nhập xuất");
         mniQLNhapXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +92,7 @@ public class FrMain extends javax.swing.JFrame {
         });
         jMenu1.add(mniQLNhapXuat);
 
+        mniQLNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user-icon.png"))); // NOI18N
         mniQLNhanVien.setText("Quản lý nhân viên");
         mniQLNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,25 +103,64 @@ public class FrMain extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/baocao.png"))); // NOI18N
         jMenu2.setText("Báo cáo");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pie-chart-icon.png"))); // NOI18N
+        jMenuItem2.setText("Nhập tổng hợp");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/baocao-icon.png"))); // NOI18N
+        jMenuItem3.setText("Nhập kho của nhân viên");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/database-icon.png"))); // NOI18N
         jMenu3.setText("Hệ thống");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Change-pass-icon.png"))); // NOI18N
         jMenuItem5.setText("Đổi mật khẩu");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Log-Out-icon.png"))); // NOI18N
         jMenuItem6.setText("Đăng xuất");
         jMenu3.add(jMenuItem6);
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Help-icon.png"))); // NOI18N
         jMenu4.setText("Trợ giúp");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/System-help-icon.png"))); // NOI18N
         jMenuItem7.setText("Hướng dẫn");
         jMenu4.add(jMenuItem7);
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/about-icon.png"))); // NOI18N
         jMenuItem8.setText("Thông tin sản phẩm");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem8);
 
         jMenuBar1.add(jMenu4);
@@ -139,6 +187,26 @@ public class FrMain extends javax.swing.JFrame {
         pnCenter.revalidate();
         pnCenter.add(new pnQuanLyNhapXuat(), BorderLayout.CENTER);
     }//GEN-LAST:event_mniQLNhapXuatActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        pnCenter.removeAll();
+        pnCenter.revalidate();
+        pnCenter.add(new pnBaoCaoNhap(), BorderLayout.CENTER);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        pnCenter.removeAll();
+        pnCenter.revalidate();
+        pnCenter.add(new pnBaoCaoXuat(), BorderLayout.CENTER);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new FrSuaNguoiDung().setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        new FrThongTinSanPham().setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +250,8 @@ public class FrMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

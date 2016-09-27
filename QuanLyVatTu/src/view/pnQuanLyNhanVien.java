@@ -46,21 +46,24 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
 
         jButton1.setText("jButton1");
 
+        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Quản Lý Nhân Viên", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 255)))); // NOI18N
         setLayout(new java.awt.BorderLayout());
 
         jLabel1.setText("Kiểu dữ liệu cần tìm");
         jPanel1.add(jLabel1);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chủ đề tìm kiếm", "Chủ đề 1", "Chủ đề 2", " " }));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(140, 28));
         jPanel1.add(jComboBox1);
 
         jLabel2.setText("Nhập dữ liệu cần tìm");
         jPanel1.add(jLabel2);
 
-        jTextField1.setPreferredSize(new java.awt.Dimension(150, 22));
+        jTextField1.setPreferredSize(new java.awt.Dimension(150, 28));
         jPanel1.add(jTextField1);
 
         jButton2.setText("Tìm");
+        jButton2.setPreferredSize(new java.awt.Dimension(49, 28));
         jPanel1.add(jButton2);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -113,11 +116,11 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
         );
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
