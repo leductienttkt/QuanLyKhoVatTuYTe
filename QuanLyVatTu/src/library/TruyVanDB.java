@@ -8,7 +8,9 @@ package library;
 import bin.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -33,11 +35,11 @@ public class TruyVanDB {
     {
         
         try {
-            String sql = "INSERT INTO TABLE_TEN VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO nhanvien VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,nv.getIdNhanVien());
             ps.setString(2,nv.getTenNhanVien());
-            ps.setDate(3, nv.getNgaySinh());
+            ps.setString(3, nv.getNgaySinh());
             ps.setString(4,nv.getDiaChi());
             ps.setString(5,nv.getSdt());
             ps.setInt(6, nv.getLuong());
@@ -49,5 +51,27 @@ public class TruyVanDB {
         } catch (SQLException ex) {
             Logger.getLogger(TruyVanDB.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+     public ResultSet view(String table, String [] cols){
+        ResultSet resultSet = null;
+        try {
+            Statement statement = (Statement) conn.createStatement();
+            String sql = "SELECT ";
+            if(cols == null || cols.length == 0){
+                sql += "* FROM";
+            }else{
+                for(int i = 0 ; i < cols.length; i++){
+                    sql += "`" + cols[i] + "`, ";
+                }
+                sql += ";";
+                sql = sql.replace("`, ;", "` FROM");
+            }
+            sql += " " + table;
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            return null;
+        }
+        return resultSet;
     }
 }

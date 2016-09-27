@@ -7,6 +7,10 @@ package view;
 
 import bin.NhanVien;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import library.TruyVanDB;
 
@@ -34,7 +38,8 @@ public class FrThemNhanVien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroupGT = new javax.swing.ButtonGroup();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         btLuu = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -45,16 +50,16 @@ public class FrThemNhanVien extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtChucVu = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        ngaySinh = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         txtDiaChi = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
         txtLuong = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jDateNgaySinh = new com.toedter.calendar.JDateChooser();
+        Nam = new javax.swing.JRadioButton();
+        nu = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thêm nhân viên");
@@ -94,14 +99,7 @@ public class FrThemNhanVien extends javax.swing.JFrame {
 
         jLabel4.setText("Ngày sinh");
 
-        ngaySinh.setModel(new javax.swing.SpinnerDateModel());
-        ngaySinh.setName("ngaySinh"); // NOI18N
-
         jLabel5.setText("Giới tính");
-
-        jCheckBox1.setText("Nam");
-
-        jCheckBox2.setText("Nữ");
 
         jLabel6.setText("Địa chỉ");
 
@@ -114,6 +112,17 @@ public class FrThemNhanVien extends javax.swing.JFrame {
         txtLuong.setName("luong"); // NOI18N
 
         jLabel8.setText("Lương");
+
+        buttonGroupGT.add(Nam);
+        Nam.setText("Nam");
+        Nam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NamActionPerformed(evt);
+            }
+        });
+
+        buttonGroupGT.add(nu);
+        nu.setText("Nữ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,16 +156,16 @@ public class FrThemNhanVien extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addGap(30, 30, 30)
-                                .addComponent(jCheckBox2))
-                            .addComponent(ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Nam)
+                                .addGap(10, 10, 10)
+                                .addComponent(nu))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtChucVu, txtDiaChi, txtIDNhanVien, txtSDT, txtTenNhanVien});
@@ -179,12 +188,12 @@ public class FrThemNhanVien extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2))
+                    .addComponent(Nam)
+                    .addComponent(nu))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,22 +222,33 @@ public class FrThemNhanVien extends javax.swing.JFrame {
     private void btLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLuuActionPerformed
         // TODO add your handling code here:
         
-        JOptionPane.showMessageDialog(null, "aaaaaa");
-        /*NhanVien nv = new NhanVien();
+        int y = jDateNgaySinh.getDate().getYear();
+        y+=1900; 
+        int m = jDateNgaySinh.getDate().getMonth() +1;
+        int d = jDateNgaySinh.getDate().getDate();
+        
+        String date = String.valueOf(y) + "-" + String.valueOf(m) + "-" +String.valueOf(d);
+        String gt;
+        if (Nam.isSelected()) gt = "nam"; else gt = "nữ";
+        
+        NhanVien nv = new NhanVien();
         nv.setChucVu(txtChucVu.getText());
         nv.setDiaChi(txtDiaChi.getText());
-        nv.setGioiTinh("nam");
+        nv.setGioiTinh(gt);
         nv.setIdNhanVien(txtIDNhanVien.getText());
         nv.setLuong(Integer.parseInt(txtLuong.getText()));
-        //nv.setNgaySinh((Date) ngaySinh.getValue());
-        //nv.setNgaySinh(d);
+        nv.setNgaySinh(date);
         nv.setSdt(txtSDT.getText());
         nv.setTenNhanVien(txtTenNhanVien.getText());
         
         TruyVanDB tv = new TruyVanDB();
-        tv.themNhanVien(nv);      */
+        tv.themNhanVien(nv);  
         
     }//GEN-LAST:event_btLuuActionPerformed
+
+    private void NamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NamActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,11 +286,12 @@ public class FrThemNhanVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Nam;
     private javax.swing.JButton btLuu;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroupGT;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateNgaySinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -280,7 +301,7 @@ public class FrThemNhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner ngaySinh;
+    private javax.swing.JRadioButton nu;
     private javax.swing.JTextField txtChucVu;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtIDNhanVien;

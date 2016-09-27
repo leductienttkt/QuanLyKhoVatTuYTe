@@ -20,7 +20,7 @@ public class NhanVien {
     private String chucVu;
     private String gioiTinh;
     private int luong;
-    private Date ngaySinh;
+    private String ngaySinh;
 
     public String getIdNhanVien() {
         return idNhanVien;
@@ -78,11 +78,11 @@ public class NhanVien {
         this.luong = luong;
     }
 
-    public Date getNgaySinh() {
+    public String getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
+    public void setNgaySinh(String ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
         

@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import library.TruyVanDB;
+
 /**
  *
  * @author Administrator
@@ -16,6 +21,7 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
      */
     public pnQuanLyNhanVien() {
         initComponents();
+        loadData();
     }
 
     /**
@@ -131,6 +137,30 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btCatThemActionPerformed
 
 
+     // Tải dữ liệu lên JTable
+    public void loadData() {
+        TruyVanDB db = new TruyVanDB();
+        ResultSet result;
+        result = db.view("NhanVien", null);
+        String[] colsName = {   "Mã nhân viên", "Tên nhân viên", "Chức vụ", "Lương", "Ngày sinh", "Giới tính", "Địa chỉ", "Phone" };
+        tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
+ 
+        try {
+            while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
+                String rows[] = new String[2];
+                rows[0] = result.getString(1); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
+                rows[1] = result.getString(2); // lấy dữ liệu tai cột số 2 ứng với tên hàng
+                tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
+                // mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+ 
+    }
+ 
+    private DefaultTableModel tableModel = new DefaultTableModel();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCatNhapLai;
     private javax.swing.JButton btCatSua;
