@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.sql.Connection;
+import library.LibraryDbConnect;
 
 /**
  *
@@ -50,6 +52,7 @@ public class FrMain extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnCenter.setPreferredSize(new java.awt.Dimension(800, 500));
         pnCenter.setLayout(new java.awt.BorderLayout());
@@ -68,7 +71,7 @@ public class FrMain extends javax.swing.JFrame {
 
         getContentPane().add(pnBot, java.awt.BorderLayout.PAGE_END);
 
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Phần mềm quản lý vật tư y tế", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 51, 0))); // NOI18N
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(0), "Phần mềm quản lý vật tư y tế", 2, 2, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 51, 0))); // NOI18N
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cat.png"))); // NOI18N
         jMenu1.setText("<html>Danh mục<br />quản lý</html>");
@@ -152,6 +155,11 @@ public class FrMain extends javax.swing.JFrame {
 
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/System-help-icon.png"))); // NOI18N
         jMenuItem7.setText("Hướng dẫn");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem7);
 
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/about-icon.png"))); // NOI18N
@@ -207,6 +215,13 @@ public class FrMain extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         new FrThongTinSanPham().setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        // LibraryDbConnect lbDB = new LibraryDbConnect();
+        //Connection conn = lbDB.getConnectMySQL();
+        //test kết nối csdl
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
