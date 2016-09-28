@@ -94,7 +94,7 @@ public class TruyVanDB {
             }
             sql += ";";
             sql = sql.replace("' and ;", "'");
-            JOptionPane.showMessageDialog(null,  sql);
+            //JOptionPane.showMessageDialog(null,  sql);
             statement.executeUpdate(sql);
  
             return true;
@@ -112,7 +112,7 @@ public class TruyVanDB {
              
             statement = (Statement) conn.createStatement();
             
-            JOptionPane.showMessageDialog(null,  sql);
+            //JOptionPane.showMessageDialog(null,  sql);
             statement.executeUpdate(sql);
                   
              return true;

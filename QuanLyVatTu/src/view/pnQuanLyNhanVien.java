@@ -236,11 +236,15 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
             //String colsWhere[] = { (String) tableModel.getColumnName(1) }; 
             String colsWhere[] = { (String) nv[1] }; 
          
-            JOptionPane.showMessageDialog(null,  "col = " + colName[0] + "value = " + newValue.get(0) + " colw = " + colsWhere[0] + " valuew = " + valueWhere.get(0));
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            JOptionPane.showConfirmDialog (null, "Are you sure?","WARNING", dialogButton);
-            if(dialogButton == JOptionPane.YES_OPTION) {
-                if (db.update("NhanVien", colName, newValue, colsWhere,
+            //JOptionPane.showMessageDialog(null,  "col = " + colName[0] + "value = " + newValue.get(0) + " colw = " + colsWhere[0] + " valuew = " + valueWhere.get(0));
+            
+            
+            
+              
+            if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING",
+        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+    // yes option
+            if (db.update("NhanVien", colName, newValue, colsWhere,
                     valueWhere)) {
                 JOptionPane.showConfirmDialog(null, "Cập nhật thành công",
                         "Thông báo", JOptionPane.CLOSED_OPTION);
@@ -250,11 +254,9 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
                         "Thông báo", JOptionPane.CLOSED_OPTION);
  
             }
-            if(dialogButton == JOptionPane.NO_OPTION) {
-                  remove(dialogButton);
-                }
-              }
-            
+        } else {
+    // no option
+        }
  
         } else { // nếu thay đổi giá trị ở cột khác
  
@@ -270,17 +272,24 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
             // lấy tên cột
             //String colsWhere[] = { (String) tableModel.getColumnName(0) };
             String colsWhere[] = { (String) nv[0] };
-            JOptionPane.showMessageDialog(null,  "col = " + colName[0] + "value = " + newValue.get(0) + " colw = " + colsWhere[0] + " valuew = " + valueWhere.get(0));
+            if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING",
+        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+    // yes option
             if (db.update("NhanVien", colName, newValue, colsWhere,
                     valueWhere)) {
                 JOptionPane.showConfirmDialog(null, "Cập nhật thành công",
-                        "Thông báo", JOptionPane.YES_OPTION);
+                        "Thông báo", JOptionPane.CLOSED_OPTION);
  
             } else {
-                JOptionPane.showConfirmDialog(null, "Lỗi cạp nhật",
-                        "Thông báo", JOptionPane.YES_OPTION);
+                JOptionPane.showConfirmDialog(null, "Lỗi cập nhật",
+                        "Thông báo", JOptionPane.CLOSED_OPTION);
+ 
             }
+        } else {
+    // no option
+        }
         }
  
     }
 }
+
