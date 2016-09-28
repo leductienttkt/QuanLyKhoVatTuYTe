@@ -7,6 +7,10 @@ package view;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import library.TruyVanDB;
 
@@ -14,14 +18,19 @@ import library.TruyVanDB;
  *
  * @author Administrator
  */
-public class pnQuanLyNhanVien extends javax.swing.JPanel {
+public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelListener{
 
     /**
      * Creates new form Quanlyvattu
      */
     public pnQuanLyNhanVien() {
         initComponents();
+        //tableModel.addTableModelListener(this);
+        jTable1.setModel(tableModel);
         loadData();
+        tableModel.addTableModelListener(this);
+        
+        
     }
 
     /**
@@ -89,11 +98,21 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
         btCatSua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btCatSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-icon.gif"))); // NOI18N
         btCatSua.setText("Sửa");
+        btCatSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCatSuaActionPerformed(evt);
+            }
+        });
         jPanel4.add(btCatSua);
 
         btCatXoa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btCatXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/del.gif"))); // NOI18N
         btCatXoa.setText("Xóa");
+        btCatXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCatXoaActionPerformed(evt);
+            }
+        });
         jPanel4.add(btCatXoa);
 
         btCatNhapLai.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -105,17 +124,6 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
 
         add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Mã nhân viên", "Tên nhân viên", "Chức vụ", "Lương", "Ca làm việc", "Ngày sinh", "Giới tính", "Địa chỉ", "Phone"
-            }
-        ));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -136,20 +144,47 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
         new FrThemNhanVien().setVisible(true);
     }//GEN-LAST:event_btCatThemActionPerformed
 
+    private void btCatSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatSuaActionPerformed
+        // TODO add your handling code here:
+       
+       
+    }//GEN-LAST:event_btCatSuaActionPerformed
+
+    private void btCatXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatXoaActionPerformed
+        // TODO add your handling code here:
+        String[] id ={"idnhanvien"};
+        String iff = (String) tableModel.getValueAt(jTable1.getSelectedRow(), 0);
+        
+        if (db.delete("NhanVien",  iff)) JOptionPane.showConfirmDialog(null, "Xóa thành công",
+                        "Thông báo", JOptionPane.CLOSED_OPTION);
+ 
+             else 
+                JOptionPane.showConfirmDialog(null, "Lỗi xóa",
+                        "Thông báo", JOptionPane.CLOSED_OPTION);;
+    }//GEN-LAST:event_btCatXoaActionPerformed
+
 
      // Tải dữ liệu lên JTable
     public void loadData() {
-        TruyVanDB db = new TruyVanDB();
+       
         ResultSet result;
         result = db.view("NhanVien", null);
-        String[] colsName = {   "Mã nhân viên", "Tên nhân viên", "Chức vụ", "Lương", "Ngày sinh", "Giới tính", "Địa chỉ", "Phone" };
+        String[] colsName = { "Mã nhân viên", "Tên nhân viên", "Ngày Sinh", "Địa Chỉ", "SĐT", "Lương", "Chức vụ", "Giới tính"};
         tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
  
         try {
             while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
-                String rows[] = new String[2];
+                String rows[] = new String[8];
                 rows[0] = result.getString(1); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
-                rows[1] = result.getString(2); // lấy dữ liệu tai cột số 2 ứng với tên hàng
+                rows[1] = result.getString(2); 
+                rows[2] = result.getString(3); 
+                rows[3] = result.getString(4); 
+                rows[4] = String.valueOf(result.getInt(5));
+                rows[5] = String.valueOf(result.getInt(6));
+                rows[6] = result.getString(7); 
+                rows[7] = result.getString(8); 
+               
+                // lấy dữ liệu tai cột số 2 ứng với tên hàng
                 tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
                 // mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
             }
@@ -160,7 +195,8 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
     }
  
     private DefaultTableModel tableModel = new DefaultTableModel();
-    
+    private TruyVanDB db = new TruyVanDB();
+    Vector valueWhere;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCatNhapLai;
     private javax.swing.JButton btCatSua;
@@ -179,4 +215,72 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+     public void tableChanged(TableModelEvent e) {
+ 
+        String nv[]={"idnhanvien","tennhanvien","ngaysinh","diachi","sdt","luong","chucvu","gioitinh"};
+        int row = e.getFirstRow();
+        int col = e.getColumn();
+        // nếu thay đổi giá trị ở cột mã hàng
+        if (col == 0) {
+            // vector có một phần tử
+            Vector newValue = new Vector();
+            newValue.add((String) tableModel.getValueAt(row, 0));
+            // mang co 1 phan tu
+            //String colName[] = { (String) tableModel.getColumnName(0) };
+            String colName[] = { (String) nv[0] };
+            valueWhere = new Vector();
+            valueWhere.add((String) tableModel.getValueAt(row, 1));
+            // mảng có 1 phần tử
+            //String colsWhere[] = { (String) tableModel.getColumnName(1) }; 
+            String colsWhere[] = { (String) nv[1] }; 
+         
+            JOptionPane.showMessageDialog(null,  "col = " + colName[0] + "value = " + newValue.get(0) + " colw = " + colsWhere[0] + " valuew = " + valueWhere.get(0));
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            JOptionPane.showConfirmDialog (null, "Are you sure?","WARNING", dialogButton);
+            if(dialogButton == JOptionPane.YES_OPTION) {
+                if (db.update("NhanVien", colName, newValue, colsWhere,
+                    valueWhere)) {
+                JOptionPane.showConfirmDialog(null, "Cập nhật thành công",
+                        "Thông báo", JOptionPane.CLOSED_OPTION);
+ 
+            } else {
+                JOptionPane.showConfirmDialog(null, "Lỗi cập nhật",
+                        "Thông báo", JOptionPane.CLOSED_OPTION);
+ 
+            }
+            if(dialogButton == JOptionPane.NO_OPTION) {
+                  remove(dialogButton);
+                }
+              }
+            
+ 
+        } else { // nếu thay đổi giá trị ở cột khác
+ 
+            Vector newValue = new Vector();
+            newValue.add((String) tableModel.getValueAt(row, col)); 
+            // mang co 1 phan tu
+            //String colName[] = { (String) tableModel.getColumnName(col) }; 
+            String colName[] = { (String) nv[col] }; 
+            // vector có 1 phần tử
+            valueWhere = new Vector();
+            valueWhere.add((String) tableModel.getValueAt(row, 0));
+           
+            // lấy tên cột
+            //String colsWhere[] = { (String) tableModel.getColumnName(0) };
+            String colsWhere[] = { (String) nv[0] };
+            JOptionPane.showMessageDialog(null,  "col = " + colName[0] + "value = " + newValue.get(0) + " colw = " + colsWhere[0] + " valuew = " + valueWhere.get(0));
+            if (db.update("NhanVien", colName, newValue, colsWhere,
+                    valueWhere)) {
+                JOptionPane.showConfirmDialog(null, "Cập nhật thành công",
+                        "Thông báo", JOptionPane.YES_OPTION);
+ 
+            } else {
+                JOptionPane.showConfirmDialog(null, "Lỗi cạp nhật",
+                        "Thông báo", JOptionPane.YES_OPTION);
+            }
+        }
+ 
+    }
 }
