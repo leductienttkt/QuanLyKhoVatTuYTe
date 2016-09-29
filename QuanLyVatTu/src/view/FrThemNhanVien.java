@@ -243,7 +243,7 @@ public class FrThemNhanVien extends javax.swing.JFrame {
         nv.setNgaySinh(date);
         nv.setSdt(txtSDT.getText());
         nv.setTenNhanVien(txtTenNhanVien.getText());
-        
+        nv.setHoatDong("1");
         TruyVanDB tv = new TruyVanDB();
         tv.themNhanVien(nv);  
         

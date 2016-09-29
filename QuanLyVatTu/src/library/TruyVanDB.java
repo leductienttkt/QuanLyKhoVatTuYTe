@@ -36,7 +36,7 @@ public class TruyVanDB {
     {
         
         try {
-            String sql = "INSERT INTO nhanvien VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO nhanvien VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,nv.getIdNhanVien());
             ps.setString(2,nv.getTenNhanVien());
@@ -46,7 +46,7 @@ public class TruyVanDB {
             ps.setInt(6, nv.getLuong());
             ps.setString(7,nv.getChucVu());
             ps.setString(8,nv.getGioiTinh());
-            
+            ps.setString(9,nv.getHoatDong());
             ps.execute();
             JOptionPane.showMessageDialog(null, "ok");
         } catch (SQLException ex) {
@@ -58,7 +58,7 @@ public class TruyVanDB {
         ResultSet resultSet = null;
         try {
             Statement statement = (Statement) conn.createStatement();
-            String sql = "SELECT ";
+            /*String sql = "SELECT ";
             if(cols == null || cols.length == 0){
                 sql += "* FROM";
             }else{
@@ -68,7 +68,8 @@ public class TruyVanDB {
                 sql += ";";
                 sql = sql.replace("`, ;", "` FROM");
             }
-            sql += " " + table;
+            sql += " " + table +"WHERE hoatdong = '1'";*/
+            String sql = "SELECT * FROM nhanvien WHERE hoatdong = '1'";
             resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {
             return null;
@@ -108,8 +109,8 @@ public class TruyVanDB {
         
             Statement statement;
         try {
-             String sql = "DELETE FROM " + table + " WHERE 'idnhanvien' = '"+ id+"'";
-             
+             //String sql = "DELETE FROM " + table + " WHERE 'idnhanvien' = '"+ id+"'";
+             String sql = "UPDATE nhanvien SET hoatdong = '0' WHERE idnhanvien = '" + id+"'";
             statement = (Statement) conn.createStatement();
             
             //JOptionPane.showMessageDialog(null,  sql);

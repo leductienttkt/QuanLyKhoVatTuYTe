@@ -108,6 +108,18 @@ public class NhapXuatDB {
         return resultSet;
     } 
      
+     public ResultSet baoCaoNhapNV(String tu, String den, String nv){
+       
+        try {
+            Statement statement = (Statement) conn.createStatement();
+            String sql = "SELECT * FROM chitietnhap,hanghoa,nhanvien WHERE ngaynhap>='"+tu+"' AND ngaynhap<='" +den+"' AND hanghoa.idhanghoa = chitietnhap.idhanghoa AND chitietnhap.idnhanvien='"+nv+"' AND nhanvien.idnhanvien=chitietnhap.idnhanvien" ;
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            return null;
+        }
+        return resultSet;
+    } 
+     
     public ResultSet comboboxData(){
        
         try {
@@ -119,4 +131,30 @@ public class NhapXuatDB {
         }
         return resultSet;
     } 
+    
+    public ResultSet comboboxDataNV(){
+       
+        try {
+            Statement statement = (Statement) conn.createStatement();
+            String sql = "SELECT idnhanvien, tennhanvien FROM nhanvien";
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            return null;
+        }
+        return resultSet;
+    } 
+    
+    public ResultSet dsHangHoa(String idHang,String tenHang){
+       
+        try {
+            Statement statement = (Statement) conn.createStatement();
+            String sql = "SELECT * FROM chitietnhap,hanghoa WHERE (chitietnhap.idhanghoa = '"+idHang+"' OR hanghoa.tenhang ='"+tenHang+"') AND chitietnhap.idhanghoa = hanghoa.idhanghoa AND chitietnhap.hienco >0";
+            System.out.print(sql);
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            return null;
+        }
+        return resultSet;
+    } 
+    
 }

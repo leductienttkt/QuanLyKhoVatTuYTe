@@ -7,6 +7,9 @@ package view;
 
 import java.awt.BorderLayout;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import library.LibraryDbConnect;
 
 /**
@@ -193,7 +196,11 @@ public class FrMain extends javax.swing.JFrame {
     private void mniQLNhapXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLNhapXuatActionPerformed
         pnCenter.removeAll();
         pnCenter.revalidate();
-        pnCenter.add(new pnQuanLyNhapXuat(), BorderLayout.CENTER);
+        try {
+            pnCenter.add(new pnQuanLyNhapXuat(), BorderLayout.CENTER);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_mniQLNhapXuatActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -205,7 +212,11 @@ public class FrMain extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         pnCenter.removeAll();
         pnCenter.revalidate();
-        pnCenter.add(new pnBaoCaoXuat(), BorderLayout.CENTER);
+        try {
+            pnCenter.add(new pnBaoCaoNhapNhanVien(), BorderLayout.CENTER);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

@@ -5,8 +5,11 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import library.NhapXuatDB;
 import library.TienIch;
@@ -15,15 +18,16 @@ import library.TienIch;
  *
  * @author Administrator
  */
-public class pnBaoCaoNhap extends javax.swing.JPanel {
+public class pnBaoCaoNhapNhanVien extends javax.swing.JPanel implements ActionListener{
 
     /**
      * Creates new form pnBaoCaoXuat
      */
-    public pnBaoCaoNhap() {
-        initComponents(); 
-        tableNhapTong.setModel(tableModel);
-        
+    public pnBaoCaoNhapNhanVien() throws SQLException {
+        initComponents();
+        tableNhapNV.setModel(tableModel);
+        khoitaoCombobox();
+        comboNhanVien.addActionListener(this);
     }
 
     /**
@@ -43,21 +47,23 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
         dateTu = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         dateDen = new com.toedter.calendar.JDateChooser();
-        btBaoCao = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        comboNhanVien = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableNhapTong = new javax.swing.JTable();
+        tableNhapNV = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Báo Cáo Nhập", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 204)))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Báo Cáo Xuất", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 255)))); // NOI18N
         setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Báo cáo hàng hóa nhập");
+        jLabel1.setText("Báo cáo hàng hóa nhập theo nhân viên");
         jPanel1.add(jLabel1);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -72,23 +78,29 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
         jPanel4.add(jLabel3);
         jPanel4.add(dateDen);
 
-        btBaoCao.setText("Báo cáo");
-        btBaoCao.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Nhân viên");
+        jPanel4.add(jLabel4);
+
+        comboNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel4.add(comboNhanVien);
+
+        jButton1.setText("Báo cáo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBaoCaoActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel4.add(btBaoCao);
-
-        jTextField2.setPreferredSize(new java.awt.Dimension(100, 28));
-        jPanel4.add(jTextField2);
+        jPanel4.add(jButton1);
 
         jButton4.setText("Tìm");
         jPanel4.add(jButton4);
 
+        jTextField2.setPreferredSize(new java.awt.Dimension(100, 28));
+        jPanel4.add(jTextField2);
+
         jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
-        tableNhapTong.setModel(new javax.swing.table.DefaultTableModel(
+        tableNhapNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -99,17 +111,19 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tableNhapTong);
+        jScrollPane2.setViewportView(tableNhapNV);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -128,49 +142,28 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
         jPanel3.add(jButton3);
 
         add(jPanel3, java.awt.BorderLayout.PAGE_END);
+
+        getAccessibleContext().setAccessibleName("Báo Cáo Nhập ");
+        getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void btBaoCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBaoCaoActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        TienIch ti = new TienIch();
+         TienIch ti = new TienIch();
         String tu, den;
         tu = ti.getDate(dateTu);
         den = ti.getDate(dateDen);
-        
-        loadData(tu,den);
-    }//GEN-LAST:event_btBaoCaoActionPerformed
-    
-    NhapXuatDB nx = new NhapXuatDB();
-    private DefaultTableModel tableModel = new DefaultTableModel();
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btBaoCao;
-    private com.toedter.calendar.JDateChooser dateDen;
-    private com.toedter.calendar.JDateChooser dateTu;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTable tableNhapTong;
-    // End of variables declaration//GEN-END:variables
+        loadData(tu,den,idNV);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-
-public void loadData(String tu, String den) {
+    public void loadData(String tu, String den,String nv) {
        
         ResultSet result;
-        result = nx.baoCaoNhap(tu, den);
+        result = nx.baoCaoNhapNV(tu, den,idNV);
         String[] colsName = { "STT", "Tên sản phẩm", "Số lượng", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Ngày nhập","Người nhập", "Vị trí"};
         tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
         int i =1;
@@ -206,4 +199,54 @@ public void loadData(String tu, String den) {
             tableModel.removeRow(i-1);
         }
     }
+
+    public void khoitaoCombobox() throws SQLException
+    {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        ResultSet result;
+        result = nx.comboboxDataNV();
+        while(result.next()) 
+        {
+            model.addElement(result.getString(2)); 
+            model1.addElement(result.getString(1)); 
+        }
+        comboNhanVien.setModel(model);
+    }
+    
+     @Override
+     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == comboNhanVien) {
+            idNV = model1.getElementAt(comboNhanVien.getSelectedIndex()).toString();
+        }
+        /*if (e.getSource() == comboTen) {
+            comboID.setSelectedIndex(comboTen.getSelectedIndex());
+        }*/
+    }
+    
+    String idNV;
+    NhapXuatDB nx = new NhapXuatDB();
+    private DefaultTableModel tableModel = new DefaultTableModel();
+    DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboNhanVien;
+    private com.toedter.calendar.JDateChooser dateDen;
+    private com.toedter.calendar.JDateChooser dateTu;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tableNhapNV;
+    // End of variables declaration//GEN-END:variables
 }

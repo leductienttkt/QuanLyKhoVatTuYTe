@@ -21,6 +21,15 @@ public class NhanVien {
     private String gioiTinh;
     private int luong;
     private String ngaySinh;
+     private String hoatDong;
+
+    public String getHoatDong() {
+        return hoatDong;
+    }
+
+    public void setHoatDong(String hoatDong) {
+        this.hoatDong = hoatDong;
+    }
 
     public String getIdNhanVien() {
         return idNhanVien;
