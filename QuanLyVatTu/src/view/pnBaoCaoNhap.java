@@ -5,6 +5,12 @@
  */
 package view;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import library.NhapXuatDB;
+import library.TienIch;
+
 /**
  *
  * @author Administrator
@@ -15,7 +21,8 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
      * Creates new form pnBaoCaoXuat
      */
     public pnBaoCaoNhap() {
-        initComponents();
+        initComponents(); 
+        tableNhapTong.setModel(tableModel);
         
     }
 
@@ -33,15 +40,15 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        dateTu = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
+        dateDen = new com.toedter.calendar.JDateChooser();
+        btBaoCao = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableNhapTong = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -59,18 +66,19 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
 
         jLabel2.setText("Từ:");
         jPanel4.add(jLabel2);
-
-        jSpinner1.setModel(new javax.swing.SpinnerDateModel());
-        jPanel4.add(jSpinner1);
+        jPanel4.add(dateTu);
 
         jLabel3.setText("Đến:");
         jPanel4.add(jLabel3);
+        jPanel4.add(dateDen);
 
-        jSpinner2.setModel(new javax.swing.SpinnerDateModel());
-        jPanel4.add(jSpinner2);
-
-        jButton1.setText("Báo cáo");
-        jPanel4.add(jButton1);
+        btBaoCao.setText("Báo cáo");
+        btBaoCao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBaoCaoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btBaoCao);
 
         jTextField2.setPreferredSize(new java.awt.Dimension(100, 28));
         jPanel4.add(jTextField2);
@@ -80,30 +88,28 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableNhapTong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Ngày sản xuất", "Hạn sử dụng", "Nhà sản xuất"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tableNhapTong);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -128,9 +134,22 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-
+    private void btBaoCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBaoCaoActionPerformed
+        // TODO add your handling code here:
+        TienIch ti = new TienIch();
+        String tu, den;
+        tu = ti.getDate(dateTu);
+        den = ti.getDate(dateDen);
+        
+        loadData(tu,den);
+    }//GEN-LAST:event_btBaoCaoActionPerformed
+    
+    NhapXuatDB nx = new NhapXuatDB();
+    private DefaultTableModel tableModel = new DefaultTableModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btBaoCao;
+    private com.toedter.calendar.JDateChooser dateDen;
+    private com.toedter.calendar.JDateChooser dateTu;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -142,10 +161,49 @@ public class pnBaoCaoNhap extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tableNhapTong;
     // End of variables declaration//GEN-END:variables
+
+
+public void loadData(String tu, String den) {
+       
+        ResultSet result;
+        result = nx.baoCaoNhap(tu, den);
+        String[] colsName = { "STT", "Tên sản phẩm", "Số lượng", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Ngày nhập","Người nhập", "Vị trí"};
+        tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
+        int i =1;
+        clearOldDataInTableModel();
+        try {
+            while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
+                String rows[] = new String[9];
+                rows[0] = String.valueOf(i); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
+                rows[1] = result.getString(12); 
+                rows[2] = result.getString(4); 
+                rows[3] = result.getString(5); 
+                rows[4] = result.getString(6); 
+                rows[5] = String.valueOf(result.getInt(7));
+                rows[6] = result.getString(3); 
+                rows[7] = result.getString(15); 
+                rows[8] = result.getString(9); 
+                i++;
+                // lấy dữ liệu tai cột số 2 ứng với tên hàng
+                tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
+                // mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+ 
+        
+    }
+
+    private void clearOldDataInTableModel(){
+        //Xóa theo cách 2, hiệu suất làm việc cao hơn
+        int rowCount = tableModel.getRowCount();
+        for(int i = rowCount;i>0;i--){
+            tableModel.removeRow(i-1);
+        }
+    }
 }

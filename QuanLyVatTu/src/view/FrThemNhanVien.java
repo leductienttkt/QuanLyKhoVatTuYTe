@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import library.TienIch;
 import library.TruyVanDB;
 
 /**
@@ -222,12 +223,14 @@ public class FrThemNhanVien extends javax.swing.JFrame {
     private void btLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLuuActionPerformed
         // TODO add your handling code here:
         
-        int y = jDateNgaySinh.getDate().getYear();
+        /*int y = jDateNgaySinh.getDate().getYear();
         y+=1900; 
         int m = jDateNgaySinh.getDate().getMonth() +1;
         int d = jDateNgaySinh.getDate().getDate();
         
-        String date = String.valueOf(y) + "-" + String.valueOf(m) + "-" +String.valueOf(d);
+        String date = String.valueOf(y) + "-" + String.valueOf(m) + "-" +String.valueOf(d);*/
+        TienIch ti = new TienIch();
+        String date = ti.getDate(jDateNgaySinh);
         String gt;
         if (Nam.isSelected()) gt = "nam"; else gt = "nữ";
         
