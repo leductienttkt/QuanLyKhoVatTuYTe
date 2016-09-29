@@ -50,7 +50,7 @@ public class NhapXuatDB {
             ps.setString(1,nhap.getHangHoa().getIdHangHoa());
             ps.setString(2,nhap.getHangHoa().getTenHangHoa());
             ps.setString(3, nhap.getHangHoa().getDonVi());
-            ps.execute();
+            ps.executeUpdate();
             
             String sql = "INSERT INTO chitietnhap VALUES (?,?,?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class NhapXuatDB {
             ps.setString(9,nhap.getViTri());
             ps.setString(10,nhap.getNhaCungCap());
             
-            ps.execute();
+            ps.executeUpdate();
             }
             JOptionPane.showMessageDialog(null, "ok");
             
