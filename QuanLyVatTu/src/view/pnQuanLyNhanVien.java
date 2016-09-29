@@ -18,7 +18,7 @@ import library.TruyVanDB;
  *
  * @author Administrator
  */
-public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelListener{
+public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelListener {
 
     /**
      * Creates new form Quanlyvattu
@@ -29,8 +29,7 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
         jTable1.setModel(tableModel);
         loadData();
         tableModel.addTableModelListener(this);
-        
-        
+
     }
 
     /**
@@ -146,44 +145,43 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
 
     private void btCatSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatSuaActionPerformed
         // TODO add your handling code here:
-       
-       
+
+
     }//GEN-LAST:event_btCatSuaActionPerformed
 
     private void btCatXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatXoaActionPerformed
         // TODO add your handling code here:
-        String[] id ={"idnhanvien"};
+        String[] id = {"idnhanvien"};
         String iff = (String) tableModel.getValueAt(jTable1.getSelectedRow(), 0);
         
-        if (db.delete("NhanVien",  iff)) JOptionPane.showConfirmDialog(null, "Xóa thành công",
-                        "Thông báo", JOptionPane.CLOSED_OPTION);
- 
-             else 
-                JOptionPane.showConfirmDialog(null, "Lỗi xóa",
-                        "Thông báo", JOptionPane.CLOSED_OPTION);;
+        if (db.delete("nhanvien", iff) == true) {
+            db.delete("nhanvien", iff);
+            JOptionPane.showConfirmDialog(null, "Xóa thành công","Thông báo", JOptionPane.CLOSED_OPTION);
+        } else {
+            JOptionPane.showConfirmDialog(null, "Lỗi xóa","Thông báo", JOptionPane.CLOSED_OPTION);
+        };
     }//GEN-LAST:event_btCatXoaActionPerformed
 
-
-     // Tải dữ liệu lên JTable
+    // Tải dữ liệu lên JTable
     public void loadData() {
-       
+
         ResultSet result;
         result = db.view("NhanVien", null);
-        String[] colsName = { "Mã nhân viên", "Tên nhân viên", "Ngày Sinh", "Địa Chỉ", "SĐT", "Lương", "Chức vụ", "Giới tính"};
+        String[] colsName = {"Mã nhân viên", "Tên nhân viên", "Ngày Sinh", "Địa Chỉ", "SĐT", "Lương", "Chức vụ", "Giới tính"};
         tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
- 
+
         try {
             while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
                 String rows[] = new String[8];
                 rows[0] = result.getString(1); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
-                rows[1] = result.getString(2); 
-                rows[2] = result.getString(3); 
-                rows[3] = result.getString(4); 
+                rows[1] = result.getString(2);
+                rows[2] = result.getString(3);
+                rows[3] = result.getString(4);
                 rows[4] = String.valueOf(result.getInt(5));
                 rows[5] = String.valueOf(result.getInt(6));
-                rows[6] = result.getString(7); 
-                rows[7] = result.getString(8); 
-               
+                rows[6] = result.getString(7);
+                rows[7] = result.getString(8);
+
                 // lấy dữ liệu tai cột số 2 ứng với tên hàng
                 tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
                 // mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
@@ -191,9 +189,9 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
         } catch (SQLException e) {
             e.printStackTrace();
         }
- 
+
     }
- 
+
     private DefaultTableModel tableModel = new DefaultTableModel();
     private TruyVanDB db = new TruyVanDB();
     Vector valueWhere;
@@ -217,9 +215,9 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
     // End of variables declaration//GEN-END:variables
 
     @Override
-     public void tableChanged(TableModelEvent e) {
- 
-        String nv[]={"idnhanvien","tennhanvien","ngaysinh","diachi","sdt","luong","chucvu","gioitinh"};
+    public void tableChanged(TableModelEvent e) {
+
+        String nv[] = {"idnhanvien", "tennhanvien", "ngaysinh", "diachi", "sdt", "luong", "chucvu", "gioitinh"};
         int row = e.getFirstRow();
         int col = e.getColumn();
         // nếu thay đổi giá trị ở cột mã hàng
@@ -229,67 +227,62 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
             newValue.add((String) tableModel.getValueAt(row, 0));
             // mang co 1 phan tu
             //String colName[] = { (String) tableModel.getColumnName(0) };
-            String colName[] = { (String) nv[0] };
+            String colName[] = {(String) nv[0]};
             valueWhere = new Vector();
             valueWhere.add((String) tableModel.getValueAt(row, 1));
             // mảng có 1 phần tử
             //String colsWhere[] = { (String) tableModel.getColumnName(1) }; 
-            String colsWhere[] = { (String) nv[1] }; 
-         
+            String colsWhere[] = {(String) nv[1]};
+
             //JOptionPane.showMessageDialog(null,  "col = " + colName[0] + "value = " + newValue.get(0) + " colw = " + colsWhere[0] + " valuew = " + valueWhere.get(0));
-            
-            
-            
-              
             if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING",
-        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-    // yes option
-            if (db.update("NhanVien", colName, newValue, colsWhere,
-                    valueWhere)) {
-                JOptionPane.showConfirmDialog(null, "Cập nhật thành công",
-                        "Thông báo", JOptionPane.CLOSED_OPTION);
- 
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                // yes option
+                if (db.update("NhanVien", colName, newValue, colsWhere,
+                        valueWhere)) {
+                    JOptionPane.showConfirmDialog(null, "Cập nhật thành công",
+                            "Thông báo", JOptionPane.CLOSED_OPTION);
+
+                } else {
+                    JOptionPane.showConfirmDialog(null, "Lỗi cập nhật",
+                            "Thông báo", JOptionPane.CLOSED_OPTION);
+
+                }
             } else {
-                JOptionPane.showConfirmDialog(null, "Lỗi cập nhật",
-                        "Thông báo", JOptionPane.CLOSED_OPTION);
- 
+                // no option
             }
-        } else {
-    // no option
-        }
- 
+
         } else { // nếu thay đổi giá trị ở cột khác
- 
+
             Vector newValue = new Vector();
-            newValue.add((String) tableModel.getValueAt(row, col)); 
+            newValue.add((String) tableModel.getValueAt(row, col));
             // mang co 1 phan tu
             //String colName[] = { (String) tableModel.getColumnName(col) }; 
-            String colName[] = { (String) nv[col] }; 
+            String colName[] = {(String) nv[col]};
             // vector có 1 phần tử
             valueWhere = new Vector();
             valueWhere.add((String) tableModel.getValueAt(row, 0));
-           
+
             // lấy tên cột
             //String colsWhere[] = { (String) tableModel.getColumnName(0) };
-            String colsWhere[] = { (String) nv[0] };
+            String colsWhere[] = {(String) nv[0]};
             if (JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING",
-        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-    // yes option
-            if (db.update("NhanVien", colName, newValue, colsWhere,
-                    valueWhere)) {
-                JOptionPane.showConfirmDialog(null, "Cập nhật thành công",
-                        "Thông báo", JOptionPane.CLOSED_OPTION);
- 
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                // yes option
+                if (db.update("NhanVien", colName, newValue, colsWhere,
+                        valueWhere)) {
+                    JOptionPane.showConfirmDialog(null, "Cập nhật thành công",
+                            "Thông báo", JOptionPane.CLOSED_OPTION);
+
+                } else {
+                    JOptionPane.showConfirmDialog(null, "Lỗi cập nhật",
+                            "Thông báo", JOptionPane.CLOSED_OPTION);
+
+                }
             } else {
-                JOptionPane.showConfirmDialog(null, "Lỗi cập nhật",
-                        "Thông báo", JOptionPane.CLOSED_OPTION);
- 
+                // no option
             }
-        } else {
-    // no option
         }
-        }
- 
+
     }
 }
-

@@ -6,12 +6,6 @@
 package view;
 
 import bin.NhanVien;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import library.TienIch;
 import library.TruyVanDB;
 
