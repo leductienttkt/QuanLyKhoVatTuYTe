@@ -206,14 +206,14 @@ public class FrMain extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         pnCenter.removeAll();
         pnCenter.revalidate();
-        pnCenter.add(new pnBaoCaoNhap(), BorderLayout.CENTER);
+        pnCenter.add(new pnBaoCaoXuat(), BorderLayout.CENTER);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         pnCenter.removeAll();
         pnCenter.revalidate();
         try {
-            pnCenter.add(new pnBaoCaoNhapNhanVien(), BorderLayout.CENTER);
+            pnCenter.add(new pnBaoCaoNhap(), BorderLayout.CENTER);
         } catch (SQLException ex) {
             Logger.getLogger(FrMain.class.getName()).log(Level.SEVERE, null, ex);
         }

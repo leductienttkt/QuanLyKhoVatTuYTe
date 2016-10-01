@@ -18,14 +18,14 @@ import library.TienIch;
  *
  * @author Administrator
  */
-public class pnBaoCaoNhapNhanVien extends javax.swing.JPanel implements ActionListener{
+public class pnBaoCaoXuat extends javax.swing.JPanel  implements ActionListener {
 
     /**
      * Creates new form pnBaoCaoXuat
      */
-    public pnBaoCaoNhapNhanVien() throws SQLException {
-        initComponents();
-        tableNhapNV.setModel(tableModel);
+    public pnBaoCaoXuat() throws SQLException {
+        initComponents(); 
+        tableNhapTong.setModel(tableModel);
         khoitaoCombobox();
         comboNhanVien.addActionListener(this);
     }
@@ -49,21 +49,21 @@ public class pnBaoCaoNhapNhanVien extends javax.swing.JPanel implements ActionLi
         dateDen = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         comboNhanVien = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btBaoCao = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableNhapNV = new javax.swing.JTable();
+        tableNhapTong = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Báo Cáo Xuất", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 255)))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Báo Cáo Nhập", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 204)))); // NOI18N
         setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Báo cáo hàng hóa nhập theo nhân viên");
+        jLabel1.setText("Báo cáo hàng hóa nhập");
         jPanel1.add(jLabel1);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -84,23 +84,23 @@ public class pnBaoCaoNhapNhanVien extends javax.swing.JPanel implements ActionLi
         comboNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel4.add(comboNhanVien);
 
-        jButton1.setText("Báo cáo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btBaoCao.setText("Báo cáo");
+        btBaoCao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btBaoCaoActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1);
-
-        jButton4.setText("Tìm");
-        jPanel4.add(jButton4);
+        jPanel4.add(btBaoCao);
 
         jTextField2.setPreferredSize(new java.awt.Dimension(100, 28));
         jPanel4.add(jTextField2);
 
+        jButton4.setText("Tìm");
+        jPanel4.add(jButton4);
+
         jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
-        tableNhapNV.setModel(new javax.swing.table.DefaultTableModel(
+        tableNhapTong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -111,19 +111,17 @@ public class pnBaoCaoNhapNhanVien extends javax.swing.JPanel implements ActionLi
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tableNhapNV);
+        jScrollPane2.setViewportView(tableNhapTong);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -142,44 +140,70 @@ public class pnBaoCaoNhapNhanVien extends javax.swing.JPanel implements ActionLi
         jPanel3.add(jButton3);
 
         add(jPanel3, java.awt.BorderLayout.PAGE_END);
-
-        getAccessibleContext().setAccessibleName("Báo Cáo Nhập ");
-        getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btBaoCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBaoCaoActionPerformed
         // TODO add your handling code here:
-         TienIch ti = new TienIch();
+        TienIch ti = new TienIch();
         String tu, den;
         tu = ti.getDate(dateTu);
         den = ti.getDate(dateDen);
-        loadData(tu,den,idNV);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        loadData(tu,den);
+    }//GEN-LAST:event_btBaoCaoActionPerformed
+    
+    
+    String idNV="";
+    NhapXuatDB nx = new NhapXuatDB();
+    private DefaultTableModel tableModel = new DefaultTableModel();
+    DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btBaoCao;
+    private javax.swing.JComboBox<String> comboNhanVien;
+    private com.toedter.calendar.JDateChooser dateDen;
+    private com.toedter.calendar.JDateChooser dateTu;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tableNhapTong;
+    // End of variables declaration//GEN-END:variables
 
-    public void loadData(String tu, String den,String nv) {
+
+public void loadData(String tu, String den) {
        
         ResultSet result;
-        result = nx.baoCaoNhapNV(tu, den,idNV);
-        String[] colsName = { "STT", "Tên sản phẩm", "Số lượng", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Ngày nhập","Người nhập", "Vị trí"};
+        result = nx.baoCaoXuatNV(tu, den,idNV);
+        String[] colsName = { "STT", "Tên sản phẩm", "Số lượng", "Đơn vị" ,"Đơn giá", "Ngày Xuất","Người Xuất"};
         tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
         int i =1;
         clearOldDataInTableModel();
         try {
             while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
-                String rows[] = new String[9];
+                String rows[] = new String[7];
                 rows[0] = String.valueOf(i); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
-                rows[1] = result.getString(13); 
+                rows[1] = result.getString(8); 
                 rows[2] = result.getString(4); 
-                rows[3] = result.getString(5); 
-                rows[4] = result.getString(6); 
-                rows[5] = String.valueOf(result.getInt(7));
-                rows[6] = result.getString(3); 
-                rows[7] = result.getString(16); 
-                rows[8] = result.getString(9); 
+                rows[3] = result.getString(9); 
+                rows[4] = String.valueOf(result.getInt(25));
+                rows[5] = result.getString(3); 
+                rows[6] = result.getString(11); 
+                
+              
                 i++;
                 // lấy dữ liệu tai cột số 2 ứng với tên hàng
                 tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
@@ -191,21 +215,14 @@ public class pnBaoCaoNhapNhanVien extends javax.swing.JPanel implements ActionLi
  
         
     }
-
-    private void clearOldDataInTableModel(){
-        //Xóa theo cách 2, hiệu suất làm việc cao hơn
-        int rowCount = tableModel.getRowCount();
-        for(int i = rowCount;i>0;i--){
-            tableModel.removeRow(i-1);
-        }
-    }
-
-    public void khoitaoCombobox() throws SQLException
+   public void khoitaoCombobox() throws SQLException
     {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         
         ResultSet result;
         result = nx.comboboxDataNV();
+        model.addElement("Tất cả");
+        model1.addElement("");
         while(result.next()) 
         {
             model.addElement(result.getString(2)); 
@@ -223,30 +240,14 @@ public class pnBaoCaoNhapNhanVien extends javax.swing.JPanel implements ActionLi
             comboID.setSelectedIndex(comboTen.getSelectedIndex());
         }*/
     }
+     
+     private void clearOldDataInTableModel(){
+        //Xóa theo cách 2, hiệu suất làm việc cao hơn
+        int rowCount = tableModel.getRowCount();
+        for(int i = rowCount;i>0;i--){
+            tableModel.removeRow(i-1);
+        }
+    }
     
-    String idNV;
-    NhapXuatDB nx = new NhapXuatDB();
-    private DefaultTableModel tableModel = new DefaultTableModel();
-    DefaultComboBoxModel model1 = new DefaultComboBoxModel();
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboNhanVien;
-    private com.toedter.calendar.JDateChooser dateDen;
-    private com.toedter.calendar.JDateChooser dateTu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTable tableNhapNV;
-    // End of variables declaration//GEN-END:variables
+   
 }

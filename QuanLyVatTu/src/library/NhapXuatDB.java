@@ -113,7 +113,16 @@ public class NhapXuatDB {
        
         try {
             Statement statement = (Statement) conn.createStatement();
-            String sql = "SELECT * FROM chitietnhap,hanghoa,nhanvien WHERE ngaynhap>='"+tu+"' AND ngaynhap<='" +den+"' AND hanghoa.idhanghoa = chitietnhap.idhanghoa AND chitietnhap.idnhanvien='"+nv+"' AND nhanvien.idnhanvien=chitietnhap.idnhanvien" ;
+             String sql;
+            if (nv!= ""){
+             sql = "SELECT * FROM chitietnhap,hanghoa,nhanvien WHERE ngaynhap>='"+tu+"' AND ngaynhap<='" +den+"' AND hanghoa.idhanghoa = chitietnhap.idhanghoa AND chitietnhap.idnhanvien='"+nv+"' AND nhanvien.idnhanvien=chitietnhap.idnhanvien" ;
+                System.out.println(sql);
+            }
+            else{
+             sql = "SELECT * FROM chitietnhap,hanghoa,nhanvien WHERE ngaynhap>='"+tu+"' AND ngaynhap<='" +den+"' AND hanghoa.idhanghoa = chitietnhap.idhanghoa AND nhanvien.idnhanvien=chitietnhap.idnhanvien" ;
+            System.out.println(sql);
+            }
+           
             resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {
             return null;
@@ -121,6 +130,27 @@ public class NhapXuatDB {
         return resultSet;
     } 
      
+    public ResultSet baoCaoXuatNV(String tu, String den, String nv){
+       
+        try {
+            Statement statement = (Statement) conn.createStatement();
+             String sql;
+            if (nv!= ""){
+             sql = "SELECT * FROM chitietxuat,hanghoa,nhanvien,chitietnhap WHERE ngaynhap>='"+tu+"' AND ngaynhap<='" +den+"' AND hanghoa.idhanghoa = chitietxuat.idhanghoa AND chitietxuat.idnhanvien='"+nv+"' AND nhanvien.idnhanvien=chitietxuat.idnhanvien AND chitietxuat.idnhap = chitietnhap.idnhap" ;
+                System.out.println(sql);
+            }
+            else{
+             sql = "SELECT * FROM chitietxuat,hanghoa,nhanvien,chitietnhap WHERE ngaynhap>='"+tu+"' AND ngaynhap<='" +den+"' AND hanghoa.idhanghoa = chitietxuat.idhanghoa AND nhanvien.idnhanvien=chitietxuat.idnhanvien AND chitietxuat.idnhap = chitietnhap.idnhap" ;
+            System.out.println(sql);
+            }
+           
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            return null;
+        }
+        return resultSet;
+    } 
+    
     public ResultSet comboboxData(){
        
         try {
