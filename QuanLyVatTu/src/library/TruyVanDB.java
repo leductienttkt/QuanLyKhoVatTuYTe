@@ -45,13 +45,13 @@ public class TruyVanDB {
             ps.setInt(6, nv.getLuong());
             ps.setString(7,nv.getChucVu());
             ps.setString(8,nv.getGioiTinh());
-<<<<<<< HEAD
+
             ps.setString(9,nv.getHoatDong());
             ps.execute();
-=======
+
             
             ps.executeUpdate();
->>>>>>> origin/master
+
             JOptionPane.showMessageDialog(null, "ok");
         } catch (SQLException ex) {
             Logger.getLogger(TruyVanDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,14 +113,14 @@ public class TruyVanDB {
         
             Statement statement;
         try {
-<<<<<<< HEAD
+
              //String sql = "DELETE FROM " + table + " WHERE 'idnhanvien' = '"+ id+"'";
              String sql = "UPDATE nhanvien SET hoatdong = '0' WHERE idnhanvien = '" + id+"'";
-=======
-             String sql = "DELETE FROM " + table + " WHERE 'nhanvien.idnhanvien' = '"+ id+"'";
+
+             //String sql = "DELETE FROM " + table + " WHERE 'nhanvien.idnhanvien' = '"+ id+"'";
 //             String sql = "DELETE FROM nhanvien WHERE idnhanvien = 1";
              
->>>>>>> origin/master
+
             statement = (Statement) conn.createStatement();
             System.out.println(sql);
             

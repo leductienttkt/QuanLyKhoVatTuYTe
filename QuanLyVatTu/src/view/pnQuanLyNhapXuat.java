@@ -7,6 +7,7 @@ package view;
 
 import bean.HangHoa;
 import bean.NhapHang;
+import bean.XuatHang;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -40,6 +41,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
         comboIDHang.addActionListener(this);
         comboTenHang.addActionListener(this);
         tableHang.setModel(tableModel);
+        tableXuat.setModel(tableModel1);
         khoitaoComboboxNhap();
         
     }
@@ -326,7 +328,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1254, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1145, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -389,8 +391,6 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
 
         txtNgayXuat.setText("Tìm theo mã");
 
-        txtIDXuat.setText("jTextField2");
-
         btTim.setText("Tìm");
         btTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -401,6 +401,11 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
         jLabel18.setText("Số lượng");
 
         btXoa.setText("Xóa");
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaActionPerformed(evt);
+            }
+        });
 
         btThem.setText("Thêm");
         btThem.setActionCommand("");
@@ -438,7 +443,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
 
         btXuat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-icon.gif"))); // NOI18N
-        btXuat.setText("Thêm");
+        btXuat.setText("Xuất");
         btXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btXuatActionPerformed(evt);
@@ -480,7 +485,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
                 .addGap(38, 38, 38)
                 .addComponent(btTim)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnXuatLayout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addGap(18, 18, 18)
@@ -488,7 +493,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
                     .addGroup(pnXuatLayout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtIDXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIDXuat)))
                 .addGap(155, 155, 155))
             .addGroup(pnXuatLayout.createSequentialGroup()
                 .addGroup(pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,31 +512,31 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnXuatLayout.createSequentialGroup()
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 286, Short.MAX_VALUE))
             .addGroup(pnXuatLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnXuatLayout.createSequentialGroup()
                         .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel20)
+                        .addGap(307, 307, 307))
                     .addGroup(pnXuatLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnXuatLayout.createSequentialGroup()
                                 .addGroup(pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(spinnerSL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(81, 81, 81))
+                                .addGap(55, 55, 55))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnXuatLayout.createSequentialGroup()
                                 .addGroup(pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btThem))
-                                .addGap(73, 73, 73)))))
-                .addGroup(pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                                .addGap(47, 47, 47)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
         pnXuatLayout.setVerticalGroup(
             pnXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -598,7 +603,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1259, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -651,6 +656,21 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
 
     private void btXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXuatActionPerformed
         // TODO add your handling code here:
+        XuatHang xuat[] = new XuatHang[1000];
+        
+        for (int i=0;i<tableXuat.getRowCount();i++)
+        {
+            xuat[i] = new XuatHang();
+            xuat[i].setIdNhanVien("nv002");
+            xuat[i].setIdNhap((String)tableModel1.getValueAt(i, 6));
+            xuat[i].setIdXuat(txtIDXuat.getText());
+            xuat[i].setNgayXuat(today);
+            xuat[i].setSoLuong((int) spinnerSL.getValue());
+            xuat[i].setIdHangHoa((String)tableModel1.getValueAt(i, 7));
+            System.out.print(xuat[i].getIdHangHoa());
+        }
+        
+        nx.xuatHang(xuat,tableXuat.getRowCount());
     }//GEN-LAST:event_btXuatActionPerformed
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
@@ -660,7 +680,24 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
+        String[] colsName = { "Tên sản phẩm", "Số lượng", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Vị trí","Mã nhập","Mã hàng"};
+        tableModel1.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
+        String rows[] = new String[8];
+        rows[0] = (String) tableModel.getValueAt(tableHang.getSelectedRow(), 1);
+        rows[1] = spinnerSL.getValue().toString();
+        rows[2] = (String) tableModel.getValueAt(tableHang.getSelectedRow(), 3);
+        rows[3] = (String) tableModel.getValueAt(tableHang.getSelectedRow(), 4);
+        rows[4] = (String) tableModel.getValueAt(tableHang.getSelectedRow(), 5);
+        rows[5] = (String) tableModel.getValueAt(tableHang.getSelectedRow(), 6);
+        rows[6] = (String) tableModel.getValueAt(tableHang.getSelectedRow(), 7);
+        rows[7] = (String) tableModel.getValueAt(tableHang.getSelectedRow(), 8);
+        tableModel1.addRow(rows);
     }//GEN-LAST:event_btThemActionPerformed
+
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
+        // TODO add your handling code here:
+        tableModel1.removeRow(tableXuat.getSelectedRow());
+    }//GEN-LAST:event_btXoaActionPerformed
 
     public void khoitaoComboboxNhap() throws SQLException
     {
@@ -702,13 +739,13 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
         idHang = comboIDHang.getSelectedItem().toString();
         tenHang = comboTenHang.getSelectedItem().toString();
         result = nx.dsHangHoa(idHang,tenHang);
-        String[] colsName = { "STT", "Tên sản phẩm", "SL Hiện có", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Vị trí"};
+        String[] colsName = { "STT", "Tên sản phẩm", "SL Hiện có", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Vị trí","Mã nhập","Mã hàng"};
         tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
         int i =1;
         clearOldDataInTableModel();
         try {
             while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
-                String rows[] = new String[7];
+                String rows[] = new String[9];
                 rows[0] = String.valueOf(i); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
                 rows[1] = result.getString(13); 
                 rows[2] = result.getString(11); 
@@ -716,7 +753,8 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
                 rows[4] = result.getString(6); 
                 rows[5] = String.valueOf(result.getInt(7));
                 rows[6] = result.getString(9); 
-               
+                rows[7] = result.getString(1); 
+                rows[8] = result.getString(12); 
                 i++;
                 // lấy dữ liệu tai cột số 2 ứng với tên hàng
                 tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
@@ -738,6 +776,7 @@ public class pnQuanLyNhapXuat extends javax.swing.JPanel  implements ActionListe
     int soLuong, gia;
     NhapXuatDB nx = new NhapXuatDB();
     private DefaultTableModel tableModel = new DefaultTableModel();
+    private DefaultTableModel tableModel1 = new DefaultTableModel();
     DefaultComboBoxModel model1 = new DefaultComboBoxModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCatNhapLai;

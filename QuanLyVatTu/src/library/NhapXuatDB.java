@@ -6,6 +6,7 @@
 package library;
 
 import bean.NhapHang;
+import bean.XuatHang;
 import bin.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,7 +53,7 @@ public class NhapXuatDB {
             ps.setString(3, nhap.getHangHoa().getDonVi());
             ps.executeUpdate();
             
-            String sql = "INSERT INTO chitietnhap VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO chitietnhap VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
             ps.setString(1,nhap.getIdNhap());
             ps.setString(2,nhap.getHangHoa().getIdHangHoa());
@@ -64,7 +65,7 @@ public class NhapXuatDB {
             ps.setString(8,"nv002");
             ps.setString(9,nhap.getViTri());
             ps.setString(10,nhap.getNhaCungCap());
-            
+             ps.setInt(11,nhap.getSoLuong());
             ps.execute();
             }
             else{
@@ -82,7 +83,7 @@ public class NhapXuatDB {
             ps.setString(8,"nv002");
             ps.setString(9,nhap.getViTri());
             ps.setString(10,nhap.getNhaCungCap());
-            
+            ps.setInt(11,nhap.getSoLuong());
             ps.executeUpdate();
             }
             JOptionPane.showMessageDialog(null, "ok");
@@ -149,7 +150,7 @@ public class NhapXuatDB {
         try {
             Statement statement = (Statement) conn.createStatement();
             String sql = "SELECT * FROM chitietnhap,hanghoa WHERE (chitietnhap.idhanghoa = '"+idHang+"' OR hanghoa.tenhang ='"+tenHang+"') AND chitietnhap.idhanghoa = hanghoa.idhanghoa AND chitietnhap.hienco >0";
-            System.out.print(sql);
+           
             resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {
             return null;
@@ -157,4 +158,43 @@ public class NhapXuatDB {
         return resultSet;
     } 
     
+    public void xuatHang(XuatHang[] xuat,int n)
+    {
+        try {
+            for(int i=0;i<n;i++)
+        {
+            String sql = "INSERT INTO chitietxuat VALUES (?,?,?,?,?,?)";
+             
+                ps = conn.prepareStatement(sql);
+                ps.setString(1,xuat[i].getIdXuat());
+                ps.setString(2,xuat[i].getIdHangHoa());
+                ps.setString(3, xuat[i].getNgayXuat());
+                ps.setInt(4,xuat[i].getSoLuong());
+                ps.setString(5,xuat[i].getIdNhanVien());
+                ps.setString(6, xuat[i].getIdNhap());   
+                ps.executeUpdate(); 
+                
+            sql = "UPDATE chitietnhap SET hienco = hienco -" +String.valueOf(xuat[i].getSoLuong())+ " WHERE idnhap='"+xuat[i].getIdNhap()+"'AND idhanghoa ='"+xuat[i].getIdHangHoa()+"'";
+               System.out.print(sql);
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();   
+        }
+         JOptionPane.showConfirmDialog(null, "ĐÃ XUẤT ahjhj","Thông báo", JOptionPane.CLOSED_OPTION);
+        } catch (SQLException ex) {
+                Logger.getLogger(NhapXuatDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ResultSet tonKho(){
+       
+        try {
+            Statement statement = (Statement) conn.createStatement();
+            String sql = "SELECT * FROM chitietnhap,hanghoa WHERE chitietnhap.idhanghoa = hanghoa.idhanghoa AND chitietnhap.hienco >0";
+           
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            return null;
+        }
+        return resultSet;
+    } 
 }

@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import library.NhapXuatDB;
+
 /**
  *
  * @author Administrator
@@ -16,6 +21,8 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
      */
     public pnQuanLyTonKho() {
         initComponents();
+        tableTonKho.setModel(tableModel);
+        loadData();
     }
 
     /**
@@ -38,8 +45,8 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         btCatNhapLai = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableTonKho = new javax.swing.JTable();
 
         jButton1.setText("jButton1");
 
@@ -77,34 +84,70 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
 
         add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableTonKho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STT", "Tên hàng hóa", "Mã hàng hóa", "Số lượng", "Ngày SX", "Hạn SD", "Nhà cung cấp"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tableTonKho);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
+     public void loadData() {
+       
+        ResultSet result;
+      
+        result = nx.tonKho();
+        String[] colsName = { "STT", "Tên sản phẩm", "SL Hiện có", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Vị trí",};
+        tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
+        int i =1;
+        try {
+            while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
+                String rows[] = new String[9];
+                rows[0] = String.valueOf(i); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
+                rows[1] = result.getString(13); 
+                rows[2] = result.getString(11); 
+                rows[3] = result.getString(5); 
+                rows[4] = result.getString(6); 
+                rows[5] = String.valueOf(result.getInt(7));
+                rows[6] = result.getString(9); 
+               
+                i++;
+                // lấy dữ liệu tai cột số 2 ứng với tên hàng
+                tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
+                // mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }       
+    }
+    
+    String today, ngaySX, hanSuDung, ngayNhap, idNhap, viTri, idNhanVien,idHang,tenHang;
+    int soLuong, gia;
+    NhapXuatDB nx = new NhapXuatDB();
+    private DefaultTableModel tableModel = new DefaultTableModel();
+    private DefaultTableModel tableModel1 = new DefaultTableModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCatNhapLai;
     private javax.swing.JButton jButton1;
@@ -116,8 +159,8 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tableTonKho;
     // End of variables declaration//GEN-END:variables
 }
