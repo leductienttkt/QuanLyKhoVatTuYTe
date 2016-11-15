@@ -21,6 +21,9 @@
           </Border>
         </Property>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Ph&#x1ea7;n m&#x1ec1;m qu&#x1ea3;n l&#xfd; kho v&#x1ead;t t&#x1b0; y t&#x1ebf;"/>
+      </AccessibilityProperties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
@@ -68,7 +71,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jMenuBaoCao">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/baocao.png"/>
@@ -84,7 +87,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/pie-chart-icon.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p t&#x1ed5;ng h&#x1ee3;p"/>
+                <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o Xu&#x1ea5;t"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
@@ -95,7 +98,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/baocao-icon.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p kho c&#x1ee7;a nh&#xe2;n vi&#xea;n"/>
+                <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o nh&#x1ead;p"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
@@ -132,6 +135,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -199,7 +205,7 @@
     <Container class="javax.swing.JPanel" name="pnCenter">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[800, 500]"/>
+          <Dimension value="[810, 500]"/>
         </Property>
       </Properties>
       <Constraints>

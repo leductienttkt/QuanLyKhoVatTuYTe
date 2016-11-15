@@ -13,10 +13,11 @@ public class LibraryDbConnect {
     private String url;
     
     public LibraryDbConnect(){
-        Properties prop = LibraryPropertiesFile.readFileConfig();
+       Properties prop = LibraryPropertiesFile.readFileConfig("config.properties");
        this.user = prop.getProperty("user");
        this.password = prop.getProperty("password");
        this.url = prop.getProperty("url");
+       System.out.print(user);
     }
     
     public Connection getConnectMySQL(){

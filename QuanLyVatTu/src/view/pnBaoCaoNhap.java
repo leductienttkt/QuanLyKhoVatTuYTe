@@ -9,8 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import library.LibraryPropertiesFile;
 import library.NhapXuatDB;
 import library.TienIch;
 
@@ -28,6 +30,14 @@ public class pnBaoCaoNhap extends javax.swing.JPanel implements ActionListener{
         tableNhapNV.setModel(tableModel);
         khoitaoCombobox();
         comboNhanVien.addActionListener(this);
+        quyen = prop.getProperty("quyen");
+        
+        if ("2".equals(quyen)) 
+        {
+            comboNhanVien.disable();
+            idNV = prop.getProperty("idnv");
+            
+        }
     }
 
     /**
@@ -230,6 +240,8 @@ public class pnBaoCaoNhap extends javax.swing.JPanel implements ActionListener{
     NhapXuatDB nx = new NhapXuatDB();
     private DefaultTableModel tableModel = new DefaultTableModel();
     DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+    Properties prop = LibraryPropertiesFile.readFileConfig("login.properties");
+    String quyen;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboNhanVien;
     private com.toedter.calendar.JDateChooser dateDen;

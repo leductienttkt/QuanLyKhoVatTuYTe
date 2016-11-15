@@ -5,7 +5,7 @@
  */
 package library;
 
-import bin.NhanVien;
+import bean.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

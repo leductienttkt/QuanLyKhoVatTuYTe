@@ -9,8 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import library.LibraryPropertiesFile;
 import library.NhapXuatDB;
 import library.TienIch;
 
@@ -18,16 +20,21 @@ import library.TienIch;
  *
  * @author Administrator
  */
-public class pnBaoCaoXuat extends javax.swing.JPanel  implements ActionListener {
+public class pnBaoCaoXuat extends javax.swing.JPanel implements ActionListener {
 
     /**
      * Creates new form pnBaoCaoXuat
      */
     public pnBaoCaoXuat() throws SQLException {
-        initComponents(); 
+        initComponents();
         tableNhapTong.setModel(tableModel);
         khoitaoCombobox();
         comboNhanVien.addActionListener(this);
+        quyen = prop.getProperty("quyen");
+        if ("2".equals(quyen)) {
+            comboNhanVien.disable();
+            idNV = prop.getProperty("idnv");
+        }
     }
 
     /**
@@ -152,15 +159,16 @@ public class pnBaoCaoXuat extends javax.swing.JPanel  implements ActionListener 
         String tu, den;
         tu = ti.getDate(dateTu);
         den = ti.getDate(dateDen);
-        
-        loadData(tu,den);
+
+        loadData(tu, den);
     }//GEN-LAST:event_btBaoCaoActionPerformed
-    
-    
-    String idNV="";
+
+    String idNV = "";
     NhapXuatDB nx = new NhapXuatDB();
     private DefaultTableModel tableModel = new DefaultTableModel();
     DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+    Properties prop = LibraryPropertiesFile.readFileConfig("login.properties");
+    String quyen;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBaoCao;
     private javax.swing.JComboBox<String> comboNhanVien;
@@ -183,27 +191,25 @@ public class pnBaoCaoXuat extends javax.swing.JPanel  implements ActionListener 
     private javax.swing.JTable tableNhapTong;
     // End of variables declaration//GEN-END:variables
 
+    public void loadData(String tu, String den) {
 
-public void loadData(String tu, String den) {
-       
         ResultSet result;
-        result = nx.baoCaoXuatNV(tu, den,idNV);
-        String[] colsName = { "STT", "Tên sản phẩm", "Số lượng", "Đơn vị" ,"Đơn giá", "Ngày Xuất","Người Xuất"};
+        result = nx.baoCaoXuatNV(tu, den, idNV);
+        String[] colsName = {"STT", "Tên sản phẩm", "Số lượng", "Đơn vị", "Đơn giá", "Ngày Xuất", "Người Xuất"};
         tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
-        int i =1;
+        int i = 1;
         clearOldDataInTableModel();
         try {
             while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
                 String rows[] = new String[7];
                 rows[0] = String.valueOf(i); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
-                rows[1] = result.getString(8); 
-                rows[2] = result.getString(4); 
-                rows[3] = result.getString(9); 
+                rows[1] = result.getString(8);
+                rows[2] = result.getString(4);
+                rows[3] = result.getString(9);
                 rows[4] = String.valueOf(result.getInt(25));
-                rows[5] = result.getString(3); 
-                rows[6] = result.getString(11); 
-                
-              
+                rows[5] = result.getString(3);
+                rows[6] = result.getString(11);
+
                 i++;
                 // lấy dữ liệu tai cột số 2 ứng với tên hàng
                 tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
@@ -212,27 +218,25 @@ public void loadData(String tu, String den) {
         } catch (SQLException e) {
             e.printStackTrace();
         }
- 
-        
+
     }
-   public void khoitaoCombobox() throws SQLException
-    {
+
+    public void khoitaoCombobox() throws SQLException {
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        
+
         ResultSet result;
         result = nx.comboboxDataNV();
         model.addElement("Tất cả");
         model1.addElement("");
-        while(result.next()) 
-        {
-            model.addElement(result.getString(2)); 
-            model1.addElement(result.getString(1)); 
+        while (result.next()) {
+            model.addElement(result.getString(2));
+            model1.addElement(result.getString(1));
         }
         comboNhanVien.setModel(model);
     }
-    
-     @Override
-     public void actionPerformed(ActionEvent e) {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
         if (e.getSource() == comboNhanVien) {
             idNV = model1.getElementAt(comboNhanVien.getSelectedIndex()).toString();
         }
@@ -240,14 +244,13 @@ public void loadData(String tu, String den) {
             comboID.setSelectedIndex(comboTen.getSelectedIndex());
         }*/
     }
-     
-     private void clearOldDataInTableModel(){
+
+    private void clearOldDataInTableModel() {
         //Xóa theo cách 2, hiệu suất làm việc cao hơn
         int rowCount = tableModel.getRowCount();
-        for(int i = rowCount;i>0;i--){
-            tableModel.removeRow(i-1);
+        for (int i = rowCount; i > 0; i--) {
+            tableModel.removeRow(i - 1);
         }
     }
-    
-   
+
 }
