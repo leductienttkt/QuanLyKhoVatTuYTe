@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,9 +32,23 @@ public class LoginDB {
             Statement statement = (Statement) conn.createStatement();
             String sql = "SELECT * FROM taikhoan WHERE tentaikhoan = '"+user+ "' AND matkhau='"+pass+"'";
             resultSet = statement.executeQuery(sql);
+            System.out.print(sql);
         } catch (SQLException e) {
             return null;
         }
         return resultSet;
+    }
+
+    public void doiMK(String taikhoan, String mk, int q) {
+        try {
+            Statement statement = (Statement) conn.createStatement();
+            String sql = "UPDATE taikhoan SET matkhau = '"+mk+"',quyen ="+q+" WHERE tentaikhoan = '"+taikhoan+ "'";
+            System.out.print(sql);
+            statement.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "OK");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "không thành công!");
+            System.out.print(e.toString());
+        }
     }
 }

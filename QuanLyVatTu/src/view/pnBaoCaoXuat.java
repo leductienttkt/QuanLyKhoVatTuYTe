@@ -57,8 +57,6 @@ public class pnBaoCaoXuat extends javax.swing.JPanel implements ActionListener {
         jLabel4 = new javax.swing.JLabel();
         comboNhanVien = new javax.swing.JComboBox<>();
         btBaoCao = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableNhapTong = new javax.swing.JTable();
@@ -66,11 +64,11 @@ public class pnBaoCaoXuat extends javax.swing.JPanel implements ActionListener {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Báo Cáo Nhập", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 204)))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Báo Cáo Xuất", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(0, 51, 204))); // NOI18N
         setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Báo cáo hàng hóa nhập");
+        jLabel1.setText("Báo cáo xuất kho");
         jPanel1.add(jLabel1);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -99,12 +97,6 @@ public class pnBaoCaoXuat extends javax.swing.JPanel implements ActionListener {
         });
         jPanel4.add(btBaoCao);
 
-        jTextField2.setPreferredSize(new java.awt.Dimension(100, 28));
-        jPanel4.add(jTextField2);
-
-        jButton4.setText("Tìm");
-        jPanel4.add(jButton4);
-
         jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
         tableNhapTong.setModel(new javax.swing.table.DefaultTableModel(
@@ -124,11 +116,11 @@ public class pnBaoCaoXuat extends javax.swing.JPanel implements ActionListener {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -147,6 +139,8 @@ public class pnBaoCaoXuat extends javax.swing.JPanel implements ActionListener {
         jPanel3.add(jButton3);
 
         add(jPanel3, java.awt.BorderLayout.PAGE_END);
+
+        getAccessibleContext().setAccessibleName("Báo Cáo Xuất");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -176,7 +170,6 @@ public class pnBaoCaoXuat extends javax.swing.JPanel implements ActionListener {
     private com.toedter.calendar.JDateChooser dateTu;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -187,7 +180,6 @@ public class pnBaoCaoXuat extends javax.swing.JPanel implements ActionListener {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tableNhapTong;
     // End of variables declaration//GEN-END:variables
 

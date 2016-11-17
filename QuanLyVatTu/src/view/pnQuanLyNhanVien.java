@@ -43,15 +43,12 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btCatThem = new javax.swing.JButton();
-        btCatSua = new javax.swing.JButton();
         btCatXoa = new javax.swing.JButton();
         btCatNhapLai = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -62,13 +59,6 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
 
         setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Quản Lý Nhân Viên", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 255)))); // NOI18N
         setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setText("Kiểu dữ liệu cần tìm");
-        jPanel1.add(jLabel1);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chủ đề tìm kiếm", "Chủ đề 1", "Chủ đề 2", " " }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(140, 28));
-        jPanel1.add(jComboBox1);
 
         jLabel2.setText("Nhập dữ liệu cần tìm");
         jPanel1.add(jLabel2);
@@ -94,16 +84,6 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
         });
         jPanel4.add(btCatThem);
 
-        btCatSua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btCatSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-icon.gif"))); // NOI18N
-        btCatSua.setText("Sửa");
-        btCatSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCatSuaActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btCatSua);
-
         btCatXoa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btCatXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/del.gif"))); // NOI18N
         btCatXoa.setText("Xóa");
@@ -115,8 +95,14 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
         jPanel4.add(btCatXoa);
 
         btCatNhapLai.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btCatNhapLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button_cancel.png"))); // NOI18N
-        btCatNhapLai.setText("Reset");
+        btCatNhapLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-icon.png"))); // NOI18N
+        btCatNhapLai.setText("Refresh ");
+        btCatNhapLai.setToolTipText("");
+        btCatNhapLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCatNhapLaiActionPerformed(evt);
+            }
+        });
         jPanel4.add(btCatNhapLai);
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.CENTER);
@@ -133,7 +119,7 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
         );
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
@@ -143,24 +129,22 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
         new FrThemNhanVien().setVisible(true);
     }//GEN-LAST:event_btCatThemActionPerformed
 
-    private void btCatSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatSuaActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_btCatSuaActionPerformed
-
     private void btCatXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatXoaActionPerformed
         // TODO add your handling code here:
         String[] id = {"idnhanvien"};
         String iff = (String) tableModel.getValueAt(jTable1.getSelectedRow(), 0);
-        
+
         if (db.delete("nhanvien", iff) == true) {
             db.delete("nhanvien", iff);
-            JOptionPane.showConfirmDialog(null, "Xóa thành công","Thông báo", JOptionPane.CLOSED_OPTION);
+            JOptionPane.showConfirmDialog(null, "Xóa thành công", "Thông báo", JOptionPane.CLOSED_OPTION);
         } else {
-            JOptionPane.showConfirmDialog(null, "Lỗi xóa","Thông báo", JOptionPane.CLOSED_OPTION);
+            JOptionPane.showConfirmDialog(null, "Lỗi xóa", "Thông báo", JOptionPane.CLOSED_OPTION);
         };
     }//GEN-LAST:event_btCatXoaActionPerformed
+
+    private void btCatNhapLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatNhapLaiActionPerformed
+        loadData();
+    }//GEN-LAST:event_btCatNhapLaiActionPerformed
 
     // Tải dữ liệu lên JTable
     public void loadData() {
@@ -197,13 +181,10 @@ public class pnQuanLyNhanVien extends javax.swing.JPanel implements TableModelLi
     Vector valueWhere;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCatNhapLai;
-    private javax.swing.JButton btCatSua;
     private javax.swing.JButton btCatThem;
     private javax.swing.JButton btCatXoa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

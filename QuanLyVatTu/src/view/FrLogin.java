@@ -29,6 +29,7 @@ public class FrLogin extends javax.swing.JFrame {
      */
     public FrLogin() {
         initComponents();
+        this.setLocation(500, 180);
         //setLocation(400, 150);
 
     }
@@ -218,6 +219,7 @@ public class FrLogin extends javax.swing.JFrame {
 
                     prop.put("idnv", rs.getString(5));
                     prop.put("quyen", rs.getString(4).toString());
+                    prop.put("taikhoan", rs.getString(2));
                     try {
                         prop.store(fos, "hihi");
                     } catch (IOException ex) {

@@ -227,4 +227,16 @@ public class NhapXuatDB {
         }
         return resultSet;
     }
+
+    public ResultSet timTonKho(String s) {
+        try {
+            Statement statement = (Statement) conn.createStatement();
+            String sql = "SELECT * FROM chitietnhap,hanghoa WHERE chitietnhap.idhanghoa = hanghoa.idhanghoa AND chitietnhap.hienco >0 AND (hanghoa.tenhang LIKE '%"+s+"%' OR chitietnhap.vitri LIKE '%"+s+"%')";
+            System.out.print(sql);
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            return null;
+        }
+        return resultSet;
+    }
 }

@@ -21,7 +21,7 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
      */
     public pnQuanLyTonKho() {
         initComponents();
-        tableTonKho.setModel(tableModel);
+        //tableTonKho.setModel(tableModel);
         loadData();
     }
 
@@ -36,10 +36,8 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txts = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -53,22 +51,19 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Quản Lý Vật Tư", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 255)))); // NOI18N
         setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setText("Kiểu dữ liệu cần tìm");
-        jPanel1.add(jLabel1);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chủ đề tìm kiếm", "Chủ đề 1", "Chủ đề 2", " " }));
-        jComboBox1.setMinimumSize(new java.awt.Dimension(140, 26));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(140, 28));
-        jPanel1.add(jComboBox1);
-
         jLabel2.setText("Nhập dữ liệu cần tìm");
         jPanel1.add(jLabel2);
 
-        jTextField1.setPreferredSize(new java.awt.Dimension(150, 28));
-        jPanel1.add(jTextField1);
+        txts.setPreferredSize(new java.awt.Dimension(150, 28));
+        jPanel1.add(txts);
 
         jButton2.setText("Tìm");
         jButton2.setPreferredSize(new java.awt.Dimension(49, 28));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -76,8 +71,13 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         btCatNhapLai.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btCatNhapLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button_cancel.png"))); // NOI18N
-        btCatNhapLai.setText("Rest");
+        btCatNhapLai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pie-chart-icon.png"))); // NOI18N
+        btCatNhapLai.setText("Refresh");
+        btCatNhapLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCatNhapLaiActionPerformed(evt);
+            }
+        });
         jPanel4.add(btCatNhapLai);
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.CENTER);
@@ -113,54 +113,89 @@ public class pnQuanLyTonKho extends javax.swing.JPanel {
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btCatNhapLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCatNhapLaiActionPerformed
+        xoabang();
+        loadData();
+    }//GEN-LAST:event_btCatNhapLaiActionPerformed
 
-     public void loadData() {
-       
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ResultSet result;
-      
-        result = nx.tonKho();
-        String[] colsName = { "STT", "Tên sản phẩm", "SL Hiện có", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Vị trí",};
+        xoabang();
+        DefaultTableModel tableModel = new DefaultTableModel();
+        String s = txts.getText();
+        result = nx.timTonKho(s);
+        String[] colsName = {"STT", "Tên sản phẩm", "SL Hiện có", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Vị trí",};
         tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
-        int i =1;
+        int i = 1;
         try {
             while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
                 String rows[] = new String[9];
                 rows[0] = String.valueOf(i); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
-                rows[1] = result.getString(13); 
-                rows[2] = result.getString(11); 
-                rows[3] = result.getString(5); 
-                rows[4] = result.getString(6); 
+                rows[1] = result.getString(13);                
+                rows[2] = result.getString(11);                
+                rows[3] = result.getString(5);                
+                rows[4] = result.getString(6);                
                 rows[5] = String.valueOf(result.getInt(7));
-                rows[6] = result.getString(9); 
-               
+                rows[6] = result.getString(9);                
+                
                 i++;
                 // lấy dữ liệu tai cột số 2 ứng với tên hàng
                 tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
                 // mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
             }
+            tableTonKho.setModel(tableModel);
         } catch (SQLException e) {
             e.printStackTrace();
-        }       
+        }        
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    public void loadData() {  
+        ResultSet result;
+        DefaultTableModel tableModel = new DefaultTableModel();
+        result = nx.tonKho();
+        String[] colsName = {"STT", "Tên sản phẩm", "SL Hiện có", "Ngày sản xuất", "Hạn sữ dụng", "Giá", "Vị trí",};
+        tableModel.setColumnIdentifiers(colsName); // Đặt tiêu đề cho bảng theo các giá trị của mảng colsName
+        int i = 1;
+        try {
+            while (result.next()) { // nếu còn đọc tiếp được một dòng dữ liệu
+                String rows[] = new String[9];
+                rows[0] = String.valueOf(i); // lấy dữ liệu tại cột số 1 (ứng với mã hàng)
+                rows[1] = result.getString(13);                
+                rows[2] = result.getString(11);                
+                rows[3] = result.getString(5);                
+                rows[4] = result.getString(6);                
+                rows[5] = String.valueOf(result.getInt(7));
+                rows[6] = result.getString(9);                
+                i++;
+                // lấy dữ liệu tai cột số 2 ứng với tên hàng
+                tableModel.addRow(rows); // đưa dòng dữ liệu vào tableModel để hiện thị lên jtable
+                // mỗi lần có sự thay đổi dữ liệu ở tableModel thì Jtable sẽ tự động update lại trên frame
+            }
+            tableTonKho.setModel(tableModel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }        
     }
     
-    String today, ngaySX, hanSuDung, ngayNhap, idNhap, viTri, idNhanVien,idHang,tenHang;
+    private void xoabang() {    
+            
+    }
+    String today, ngaySX, hanSuDung, ngayNhap, idNhap, viTri, idNhanVien, idHang, tenHang;
     int soLuong, gia;
     NhapXuatDB nx = new NhapXuatDB();
-    private DefaultTableModel tableModel = new DefaultTableModel();
+    //private DefaultTableModel tableModel = new DefaultTableModel();
     private DefaultTableModel tableModel1 = new DefaultTableModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCatNhapLai;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tableTonKho;
+    private javax.swing.JTextField txts;
     // End of variables declaration//GEN-END:variables
 }

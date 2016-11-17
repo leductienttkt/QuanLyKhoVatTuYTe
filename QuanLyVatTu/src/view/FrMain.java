@@ -23,17 +23,15 @@ public class FrMain extends javax.swing.JFrame {
      */
     public FrMain(int quyen) {
         initComponents();
-        
+
         this.setSize(1200, 700);
-        this.setLocation(100,30);
+        this.setLocation(100, 30);
         pnCenter.add(new pnQuanLyTonKho(), BorderLayout.CENTER);
-        if (quyen == 2)
-        {
+        if (quyen == 2) {
             //jMenuBaoCao.hide();
             mniQLNhanVien.hide();
-           
+            menuThemTK.hide();
         }
-        
     }
 
     /**
@@ -58,6 +56,7 @@ public class FrMain extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        menuThemTK = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -155,6 +154,14 @@ public class FrMain extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem5);
+
+        menuThemTK.setText("Thêm Tài Khoản");
+        menuThemTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuThemTKActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuThemTK);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Log-Out-icon.png"))); // NOI18N
         jMenuItem6.setText("Đăng xuất");
@@ -260,6 +267,11 @@ public class FrMain extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void menuThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuThemTKActionPerformed
+        // TODO add your handling code here:
+        new FrThemTaiKhoan().setVisible(true);
+    }//GEN-LAST:event_menuThemTKActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,6 +297,7 @@ public class FrMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem menuThemTK;
     private javax.swing.JMenuItem mniQLNhanVien;
     private javax.swing.JMenuItem mniQLNhapXuat;
     private javax.swing.JMenuItem mniQLVatTu;

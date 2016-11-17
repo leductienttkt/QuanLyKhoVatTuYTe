@@ -60,8 +60,6 @@ public class pnBaoCaoNhap extends javax.swing.JPanel implements ActionListener{
         jLabel4 = new javax.swing.JLabel();
         comboNhanVien = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableNhapNV = new javax.swing.JTable();
@@ -69,11 +67,12 @@ public class pnBaoCaoNhap extends javax.swing.JPanel implements ActionListener{
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Báo Cáo Xuất", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 255)))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Báo cáo Nhập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(0, 0, 204))); // NOI18N
+        setForeground(new java.awt.Color(0, 0, 255));
         setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Báo cáo hàng hóa nhập theo nhân viên");
+        jLabel1.setText("Báo cáo nhập kho");
         jPanel1.add(jLabel1);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -102,12 +101,6 @@ public class pnBaoCaoNhap extends javax.swing.JPanel implements ActionListener{
         });
         jPanel4.add(jButton1);
 
-        jButton4.setText("Tìm");
-        jPanel4.add(jButton4);
-
-        jTextField2.setPreferredSize(new java.awt.Dimension(100, 28));
-        jPanel4.add(jTextField2);
-
         jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
         tableNhapNV.setModel(new javax.swing.table.DefaultTableModel(
@@ -127,12 +120,12 @@ public class pnBaoCaoNhap extends javax.swing.JPanel implements ActionListener{
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -249,7 +242,6 @@ public class pnBaoCaoNhap extends javax.swing.JPanel implements ActionListener{
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -260,7 +252,6 @@ public class pnBaoCaoNhap extends javax.swing.JPanel implements ActionListener{
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tableNhapNV;
     // End of variables declaration//GEN-END:variables
 }
